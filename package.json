@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "nodemon -e ts --exec \"ts-node index.ts\""
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.14",
+    "dotenv": "^16.4.5",
+    "mqtt": "^5.5.2",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "twilio": "^5.0.3",
+    "typescript": "^5.4.5"
+  }
+}
