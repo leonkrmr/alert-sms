@@ -8,6 +8,4 @@ export const conf = {
         "Test"
     ],
     alertMessagePhone: 'Warnung! Bewegung am Gebäude entdeckt!',
-    alertSubjectEmail: 'Warnung! Bewegung am Gebäude entdeckt!',
-    alertTextEmail: ''
 }
