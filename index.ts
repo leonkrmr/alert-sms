@@ -25,7 +25,7 @@ for (const topic of conf.mqttAlertTopicSubscribe) {
 const receiverPhones = process.env.SMS_PHONE_NUMBERS_RECEIVE != null ? process.env.SMS_PHONE_NUMBERS_RECEIVE.split(' ') : [''];
 const senderPhone = process.env.SMS_NUMBER_SENDER;
 
-// send sms on incoming mqtt message alert to every receiving phone in config
+// send sms on incoming mqtt message alert to every receiving phone in config + logging for errors and success
 mqttClient.on("message", (topic, message, _) => {
     console.log("Message: ", topic + " - " + message.toString());
     if (message.toString() == conf.mqttTopicAlertMessageOn) {
