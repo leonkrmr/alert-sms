@@ -1,7 +1,7 @@
 import 'dotenv/config.js'
 
 export const conf = {
-    mqttHost: "192.168.2.180",
+    mqttHost: "192.168.178.32",
     mqttPort: "1883",
     mqttAlertTopicSubscribe : [
         "Alarmanlage/Bewegungssensor/Haustür",

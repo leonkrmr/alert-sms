@@ -29,8 +29,8 @@ const senderPhone = process.env.SMS_NUMBER_SENDER;
 // send sms on incoming mqtt message alert to every receiving phone in config + logging for errors and success
 mqttClient.on("message", (topic, message, _) => {
     console.log("Message: ", topic + " - " + message.toString());
+    console.log("alarm active: " + alarmActive);
     if (message.toString() === conf.mqttTopicAlertMessageOn && topic !== conf.mqttAlarmActiveTopic && alarmActive) {
-        console.log("alarm active", "sending messages");
         for (const tel of receiverPhones) {
             smsClient.messages.create({
                 body: conf.alertMessagePhone,
