@@ -5,6 +5,7 @@ const smsClient = require('twilio')(process.env.SMS_ACC_SID, process.env.SMS_AUT
 // configure host and connect to host
 const host = `mqtt://${conf.mqttHost}:${conf.mqttPort}`;
 const mqttClient = mqtt.connect(host);
+let alarmActive = false;
 
 // logging for connecting to mqtt-broker
 mqttClient.on("connect", () => {
@@ -28,7 +29,7 @@ const senderPhone = process.env.SMS_NUMBER_SENDER;
 // send sms on incoming mqtt message alert to every receiving phone in config + logging for errors and success
 mqttClient.on("message", (topic, message, _) => {
     console.log("Message: ", topic + " - " + message.toString());
-    if (message.toString() == conf.mqttTopicAlertMessageOn) {
+    if (message.toString() === conf.mqttTopicAlertMessageOn && topic !== conf.mqttAlarmActiveTopic && alarmActive) {
         console.log("alarm active", "sending messages");
         for (const tel of receiverPhones) {
             smsClient.messages.create({
@@ -41,6 +42,8 @@ mqttClient.on("message", (topic, message, _) => {
                 console.log(`Error occurred sending to ${tel}: ` + new Date().toLocaleString('de'));
             });
         }
+    } else if (conf.mqttAlarmActiveTopic) {
+        alarmActive = Boolean(JSON.parse(message.toString()))
     }
 })
 
