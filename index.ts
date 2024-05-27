@@ -45,7 +45,7 @@ mqttClient.on("message", (topic, message, _) => {
     } else if (topic === conf.mqttAlarmActiveTopic) {
         alarmActive = Boolean(JSON.parse(message.toString()))
     }
-    console.log("Alarm is " + alarmActive ? "active" : "deactivated");
+    console.log("Alarm is " + (alarmActive ? "active" : "deactivated"));
 })
 
 
