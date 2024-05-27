@@ -21,6 +21,7 @@ mqttClient.on("error", err => {
 for (const topic of conf.mqttAlertTopicSubscribe) {
     mqttClient.subscribe(topic);
 }
+mqttClient.subscribe(conf.mqttAlarmActiveTopic);
 
 // get and configure SMS receiver and sender
 const receiverPhones = process.env.SMS_PHONE_NUMBERS_RECEIVE != null ? process.env.SMS_PHONE_NUMBERS_RECEIVE.split(' ') : [''];
@@ -42,7 +43,7 @@ mqttClient.on("message", (topic, message, _) => {
                 console.log(`Error occurred sending to ${tel}: ` + new Date().toLocaleString('de'));
             });
         }
-    } else if (topic == conf.mqttAlarmActiveTopic) {
+    } else if (topic === conf.mqttAlarmActiveTopic) {
         alarmActive = Boolean(JSON.parse(message.toString()))
     }
 })
