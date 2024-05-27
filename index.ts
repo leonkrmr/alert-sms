@@ -42,7 +42,7 @@ mqttClient.on("message", (topic, message, _) => {
                 console.log(`Error occurred sending to ${tel}: ` + new Date().toLocaleString('de'));
             });
         }
-    } else if (conf.mqttAlarmActiveTopic) {
+    } else if (topic == conf.mqttAlarmActiveTopic) {
         alarmActive = Boolean(JSON.parse(message.toString()))
     }
 })
